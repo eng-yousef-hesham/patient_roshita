@@ -1,0 +1,46 @@
+
+/* ---------------------home------------------------------ */
+.home{
+    margin-top: 300px;
+    position: relative;
+    top: 0%;
+    left: 30%;
+    float: left;
+    margin-bottom: 400px;
+}
+ .home h2{
+    position: relative;
+    color:rgb(59 147 219 / 0%);
+    -webkit-text-stroke: 0.05vw rgba(59, 147, 219, 0);; 
+    font-size: 30px;
+} 
+.home0 .home .hi{
+    font-size: 44px;
+    color: brown;
+}
+/* appear animation */
+.home h2::before{
+    content: attr(data-text);
+    position: absolute;
+    font-size: 30px;
+    width: 0%;
+    left: 55px;
+    top: 10px;
+    height: 80%;
+    color: white;
+    -webkit-text-stroke: 0vw brown;
+    border-right: 2px solid brown;
+    overflow: hidden;
+    animation: animate 10s linear infinite;
+}
+@keyframes animate {
+    0%,10%,100%
+    {
+        width: 0%;
+    }
+    70%,90%
+    {
+        width: 100%;
+    }
+}
+/* ----------------------------------------------------- */

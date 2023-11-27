@@ -1,0 +1,34 @@
+
+.doctor_tab{
+    position: relative;
+    top: 100px;
+    width: 100%;
+}
+.doctor_element{
+    float: left;
+    border-style: solid;
+    width: 20%;
+    height: 600px;
+    margin: 2%;
+    overflow: hidden;
+    border-radius: 10%;
+
+}
+.doctor_element img{
+    width: 100%;
+    height: 300px;
+}
+.doctor_tab .doctor_element p{
+    margin: 10px;
+}
+/* stars rating */
+.fa{
+    position: relative;
+    left: 20px;
+    top: 25px;
+}
+.checked {
+
+    color: brown;
+  }
+  /* --------------------------------------- */

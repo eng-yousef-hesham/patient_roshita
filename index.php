@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="css/login_style.css?<?php echo time(); ?>">
+  <link rel="shortcut icon" href="imgs/logo.png" type="image/x-icon" />
+
 </head>
 
 <body>

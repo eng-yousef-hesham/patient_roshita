@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="css/login_style.css?<?php echo time(); ?>">
+  <link rel="stylesheet" href="css/new_account_css.css">
   <link rel="shortcut icon" href="imgs/logo.png" type="image/x-icon" />
 
 </head>
@@ -14,15 +14,17 @@
   <div class="background">
     <img src="imgs/background.jpg" alt="background" class="background">
   </div>
+
   <div class="logo">
     <img src="imgs/logo.png" alt="logo">
   </div>
   <div class="all">
-    <form action="index.php" method="post">
+    <form action="backend/add_new_account.php" method="post">
       <div class="login">
         <div class="first">
-          <h1>login</h1>
+          <h1>creat new user</h1>
         </div>
+
         <div class="sec">
           <label for="name">
             <p style="font-size: larger;"> username </p>
@@ -34,8 +36,22 @@
           </label>
           <input type="password" required id="password" name="password">
           <br>
+          <label for="confirm_password">
+            <p style="font-size: larger;">confirm password </p>
+          </label>
+          <input type="password" required id="confirm_password" name="confirm_password">
+          <br>
+          <br>
+          <label for="doc">doctor</label>
+          <input type="radio" id="doc" class="doc" name="user_type" value="1" >
+          
+          <label for="patient">patient</label>
+          <input type="radio" id="patient" class="patient" name="user_type" value="0" >
+          <br>
+          <br>
           <input type="submit" value="login" class="button">
-           <a href="new_account.php"><input type="button" value="creat new account" class="secbutton"></a>
+          <a href="index.php"><input type="button" value="back" class="secbutton"></a>
+
         </div>
 
       </div>
@@ -43,26 +59,6 @@
     </form>
 
   </div>
-
-  <?php
-  /*test for username and password with php and JS*/
-  if(isset($_POST['name'])&&isset($_POST['password'])){ 
-    $username = $_POST['name'];
-    $password = $_POST['password'];
-  
-    if ($username =='admin' and $password =='1233')
-    {?>
-
-  <script>
-    window.open("home.html", "_blank")
-  </script>
-  <?php
-    }
-    else
-    {
-        echo 'you are not the admin';
-    }
-  }?>
 
 </body>
 

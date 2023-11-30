@@ -80,3 +80,14 @@ body{
     border-radius: 10%;
     left: 15px;
 }
+.done{
+    position: relative;
+    font-size: large;
+    background-color: #dff2de;
+    color: #42a946;
+    padding: 10px;
+    width: 90%;
+    border: 5px;
+    left: 2.5%;
+    text-align: center;
+}

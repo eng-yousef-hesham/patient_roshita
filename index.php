@@ -23,6 +23,12 @@
         <div class="first">
           <h1>login</h1>
         </div>
+        <!-- show successfil sign up -->
+        <?php if (isset($_GET['done'])) { ?>
+          <p class="done"><?php echo $_GET['done']; ?></p>
+        <?php } ?>
+        <!-- ----------------------------------------- -->
+        
         <div class="sec">
           <label for="name">
             <p style="font-size: larger;"> username </p>
@@ -35,7 +41,7 @@
           <input type="password" required id="password" name="password">
           <br>
           <input type="submit" value="login" class="button">
-           <a href="new_account.html"><input type="button" value="creat new account" class="secbutton"></a>
+           <a href="new_account.php"><input type="button" value="creat new account" class="secbutton"></a>
         </div>
 
       </div>

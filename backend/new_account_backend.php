@@ -37,17 +37,26 @@ if (isset($_POST['name']) && isset($_POST['password']) && isset($_POST['confirm_
     header("location: ../new_account.php?error=wrong confirm password");
     exit;
   }
-  /*-------------------------------------------------*/
-  else {
-    //database inseration
-    $sql = "insert into user_login (username ,password ,name ,is_doctor) values ('$username' ,'$password' ,'$username' ,$user_type)";
-    if (mysqli_query($conn, $sql)) {
-      header("location: ../index.php?done=successfully sign up");
+  /*-------------------------------------------------*/ else {
+
+    //check if there is a user with the same name
+    $sql0 = "select username from user_login where username like '$username'";
+    $result = mysqli_query($conn, $sql0);
+    if (mysqli_num_rows($result) == 1) {
+      header("location: ../new_account.php?error=username used before");
+      mysqli_close($conn);
+      exit;
     } else {
-      echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+      //database inseration
+      $sql = "insert into user_login (username ,password ,name ,is_doctor) values ('$username' ,'$password' ,'$username' ,$user_type)";
+      if (mysqli_query($conn, $sql)) {
+        header("location: ../index.php?done=successfully sign up");
+      } else {
+        header("location: ../new_account.php?error=the user not added try again");
+        exit;
+      }
+      mysqli_close($conn);
     }
-    mysqli_close($conn);
-    
   }
   /*-------------------------------------------------------------- */
 } else {

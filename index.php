@@ -23,25 +23,30 @@
         <div class="first">
           <h1>login</h1>
         </div>
+        <!-- show error -->
+        <?php if (isset($_GET['error'])) { ?>
+          <p class="error"><?php echo $_GET['error']; ?></p>
+        <?php } ?>
+        <!-- ----------------------------------------- -->
         <!-- show successfil sign up -->
         <?php if (isset($_GET['done'])) { ?>
           <p class="done"><?php echo $_GET['done']; ?></p>
         <?php } ?>
         <!-- ----------------------------------------- -->
-        
+
         <div class="sec">
           <label for="name">
             <p style="font-size: larger;"> username </p>
           </label>
-          <input type="text" name="name" id="name" size="20px" required>
+          <input type="text" name="name" id="name" size="20px">
           <br>
           <label for="password">
             <p style="font-size: larger;">password </p>
           </label>
-          <input type="password" required id="password" name="password">
+          <input type="password" id="password" name="password">
           <br>
           <input type="submit" value="login" class="button">
-           <a href="new_account.php"><input type="button" value="creat new account" class="secbutton"></a>
+          <a href="new_account.php"><input type="button" value="creat new account" class="secbutton"></a>
         </div>
 
       </div>

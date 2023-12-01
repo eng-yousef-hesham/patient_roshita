@@ -20,8 +20,8 @@
     </div>
     </div>
     <div class="navbar">
-        <a href="home.html">HOME</a>
-        <a href="doctors_tab.html">DOCTORS</a>
+        <a href="home.php">HOME</a>
+        <a href="doctors_tab.php">DOCTORS</a>
         <a href="">prescription</a>
         <a href="">about</a>
         <p class="clear"></p>

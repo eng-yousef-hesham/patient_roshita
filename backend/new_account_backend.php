@@ -1,4 +1,3 @@
-
 <?php
 include "dbconnect.php";
 /*test for username and password with php and JS*/
@@ -60,6 +59,6 @@ if (isset($_POST['name']) && isset($_POST['password']) && isset($_POST['confirm_
   }
   /*-------------------------------------------------------------- */
 } else {
-  header("location: ../new_account.php");
+  header("location: ../new_account.php?error=fill the fields");
 }
 ?>

@@ -1,5 +1,4 @@
 <?php
-
 include "dbconnect.php";
 /*test for username and password with php */
 if (isset($_POST['name']) && isset($_POST['password'])) {
@@ -40,7 +39,7 @@ if (isset($_POST['name']) && isset($_POST['password'])) {
         //doctor pages
       }
     } else {
-      header("location: ../index.php?error=wrong user name or password or poth");
+      header("location: ../index.php?error=wrong user name or password or both");
     }
     mysqli_close($conn);
   }

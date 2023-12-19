@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/all.min.css">
   <link rel="stylesheet" href="css/index_style.css">
+  <link rel="shortcut icon" href="imgs/logo.webp" type="image/x-icon" />
   <title>Document</title>
 </head>
 
@@ -40,7 +41,7 @@
 
         <div class="col-lg-8">
           <div class="col logo d-flex">
-            <img src="imgs/logo.png" alt="logo">
+            <img src="imgs/logo.png" class="logo" alt="logo" style="width: 250px;">
           </div>
           <div class="card-body py-5 px-md-5">
             <!-- show error -->

@@ -34,7 +34,7 @@ if (isset($_POST['name']) && isset($_POST['password'])) {
       //sign in for doctor
       elseif ($row["is_doctor"] == 1) {
         // ----------------
-        // ----------------
+        header("location: ../home_for_doctors.php");
         // ----------------
         //doctor pages
       }

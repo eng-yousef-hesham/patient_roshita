@@ -38,27 +38,18 @@
             <!-- Center elements -->
             <ul class="navbar-nav flex-row d-none d-md-flex d-sm-none">
                 <li class="nav-item me-1 me-lg-1 active">
-                    <a class="nav-link" href="home.php">
+                    <a class="nav-link" href="home_for_doctors.php">
                         <span><i class="fas fa-home fa-lg fa-2xl"></i></span>
                         <h6>home</h6>
                     </a>
                 </li>
 
                 <li class="nav-item me-1 me-lg-1">
-                    <a class="nav-link" href="doctors_tab.php">
-                        <span><i class="fa-solid fa-user-doctor fa-2xl"></i></span>
-                        <h6 class="h6edit">doctors</h6>
-                    </a>
-                </li>
-
-                <li class="nav-item me-1 me-lg-1">
                     <a class="nav-link" href="#">
-                        <span><i class="fa-solid fa-prescription-bottle-medical fa-2xl"></i></span>
-                        <h6 class="h6edit">prescription</h6>
+                        <span><i class="fa-solid fa-hospital-user fa-2xl"></i></span>
+                        <h6 class="h6edit">patient</h6>
                     </a>
                 </li>
-
-
                 <li class="nav-item me-1 me-lg-1">
                     <a class="nav-link" href="#">
                         <span><i class="fa-solid fa-gear fa-2xl"></i></span>
@@ -87,13 +78,10 @@
                 <div class="collapse navbar-collapse d-lg-none d-md-none" id="main">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-lg-none">
                         <li class="nav-item">
-                            <a class="nav-link d-lg-none d-md-none" aria-current="page" href="home.php"><span><i class="fas fa-home fa-lg fa-2xs"></i> Home</span></a>
+                            <a class="nav-link d-lg-none d-md-none" aria-current="page" href="home_for_doctors.php"><span><i class="fas fa-home fa-lg fa-2xs"></i> Home</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link d-lg-none d-md-none" href="doctors_tab.php"><span><i class="fa-solid fa-user-doctor fa-lg fa-2xs"></i> doctors</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link d-lg-none d-md-none" href="#contact_me"><span><i class="fa-solid fa-prescription-bottle-medical fa-lg fa-2xs"></i> prescription</span></a>
+                            <a class="nav-link d-lg-none d-md-none" href="#contact_me"><span><i class="fa-solid fa-hospital-user fa-lg fa-2xs"></i> patient</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link d-lg-none d-md-none" href="#some_links"><span><i class="fa-solid fa-gear fa-lg fa-2xs"></i> settings</span></a>

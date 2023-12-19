@@ -37,19 +37,55 @@ if (isset($_POST['name']) && isset($_POST['password']) && isset($_POST['confirm_
     exit;
   }
   /*-------------------------------------------------*/ else {
-
+    if ($user_type == 1) {
+      $specialization = validdata($_POST['specialization']);
+      if (empty($specialization)) {
+        header("location: ../new_account.php?error=for doctors specialization is required");
+        exit;
+      }
+    }
     //check if there is a user with the same name
     $sql0 = "select username from user_login where username like '$username'";
     $result = mysqli_query($conn, $sql0);
     if (mysqli_num_rows($result) == 1) {
       header("location: ../new_account.php?error=username used before");
+
       mysqli_close($conn);
       exit;
     } else {
+      // ---------------------------------------------------------- upload image
+      $filename = $_FILES["uploadimage"]["name"];
+      $tempname = $_FILES["uploadimage"]["tmp_name"];
+      $folder = "../user_image/$filename";
       //database inseration
-      $sql = "insert into user_login (username ,password ,name ,is_doctor) values ('$username' ,'$password' ,'$username' ,$user_type)";
+      $sql = "insert into user_login (usar_image,username ,password ,name ,is_doctor) values ('$filename','$username' ,'$password' ,'$username' ,$user_type)";
       if (mysqli_query($conn, $sql)) {
-        header("location: ../index.php?done=successfully sign up");
+        // ---------------------------------------------------------- save photo into folder
+        move_uploaded_file($tempname, $folder);
+        // -----------------------------------------------------------------------------
+        if ($user_type == 0) {
+          // add to patient taple
+          $sql1 = "select id from user_login where username like '$username'";
+          $result = mysqli_query($conn, $sql1);
+          $row = mysqli_fetch_assoc($result);
+          $id_numper = $row["id"];
+          $sql2 = "insert into patient (user_id ) values ( $id_numper)";
+          if (mysqli_query($conn, $sql2)) {
+            header("location: ../index.php?done=successfully sign up");
+          }
+          // --------------------------------------------
+        } elseif ($user_type == 1) {
+          // add to doctor table
+          $sql1 = "select id from user_login where username like '$username'";
+          $result = mysqli_query($conn, $sql1);
+          $row = mysqli_fetch_assoc($result);
+          $id_numper = $row["id"];
+          $sql2 = "insert into doctor (doctor_id , specialization) values ( $id_numper ,'$specialization')";
+          if (mysqli_query($conn, $sql2)) {
+            header("location: ../index.php?done=successfully sign up");
+          }
+          // --------------------------------------------------------
+        }
       } else {
         header("location: ../new_account.php?error=the user not added try again");
         exit;
@@ -57,8 +93,8 @@ if (isset($_POST['name']) && isset($_POST['password']) && isset($_POST['confirm_
       mysqli_close($conn);
     }
   }
+
   /*-------------------------------------------------------------- */
 } else {
   header("location: ../new_account.php?error=fill the fields");
 }
-?>

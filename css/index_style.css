@@ -8,7 +8,9 @@ body{
     background-color: rgb(143, 179, 211) ;
 }
 .logo{
-    justify-content: flex-end
+    justify-content: flex-end;
+
+    
 }
 .done{
     position: relative;

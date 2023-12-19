@@ -1,0 +1,35 @@
+html{
+    width: 100%;
+    height: 100%;
+}
+body{
+    background-color: rgb(143, 179, 211);
+}
+.row{
+    background-color: rgb(143, 179, 211);
+}
+.card-body{
+    background-color: rgb(143, 179, 211) ;
+}
+.logo{
+    justify-content: flex-end
+}
+.error{
+    position: relative;
+    font-size: large;
+    background-color: #F2DEDE;
+    color: #A94442;
+    padding: 10px;
+    width: 90%;
+    border: 5px;
+    left: 2.5%;
+    text-align: center;
+}
+/* for radio button */
+    /* This CSS class is applied, by default to all the labels and
+       textboxes. The JavaScript just adds or removes it as needed. */
+       .hidden { display:none; }
+    
+       /* Give each element that uses this class a one line top and bottom margin to
+          separate it from other elements. */
+       .row { margin: 1em 0; }

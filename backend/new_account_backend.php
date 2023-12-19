@@ -71,7 +71,11 @@ if (isset($_POST['name']) && isset($_POST['password']) && isset($_POST['confirm_
           $id_numper = $row["id"];
           $sql2 = "insert into patient (user_id ) values ( $id_numper)";
           if (mysqli_query($conn, $sql2)) {
-            header("location: ../index.php?done=successfully sign up");
+            if (empty($_FILES["uploadimage"]["name"])) {
+              header("location: ../index.php?done=successfully sign up , add your photo later");
+            } else {
+              header("location: ../index.php?done=successfully sign up");
+            }
           }
           // --------------------------------------------
         } elseif ($user_type == 1) {
@@ -82,7 +86,11 @@ if (isset($_POST['name']) && isset($_POST['password']) && isset($_POST['confirm_
           $id_numper = $row["id"];
           $sql2 = "insert into doctor (doctor_id , specialization) values ( $id_numper ,'$specialization')";
           if (mysqli_query($conn, $sql2)) {
-            header("location: ../index.php?done=successfully sign up");
+            if (empty($_FILES["uploadimage"]["name"])) {
+              header("location: ../index.php?done=successfully sign up , add your photo later");
+            } else {
+              header("location: ../index.php?done=successfully sign up");
+            }
           }
           // --------------------------------------------------------
         }

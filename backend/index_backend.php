@@ -1,5 +1,6 @@
 <?php
 include "dbconnect.php";
+session_start();
 /*test for username and password with php */
 if (isset($_POST['name']) && isset($_POST['password'])) {
   // data validation
@@ -22,17 +23,22 @@ if (isset($_POST['name']) && isset($_POST['password'])) {
     exit;
   } else {
     //database search
-    $sql = "select is_doctor , username , password from user_login where username like '$username' and password = '$password' ";
+    $sql = "select id , is_doctor , username , password from user_login where username like '$username' and password = '$password' ";
     $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    // start session with id
+    $_SESSION['name'] = $row['id'];
+    // ----------------------------------------
     if (mysqli_num_rows($result) == 1) {
-      $row = mysqli_fetch_assoc($result);
+
       //sign in for patient
       if ($row['is_doctor'] == 0) {
         //patient pages
+        
         header("location: ../home.php");
       }
       //sign in for doctor
-      elseif ($row["is_doctor"] == 1) {
+      elseif ($row['is_doctor'] == 1) {
         // ----------------
         header("location: ../home_for_doctors.php");
         // ----------------

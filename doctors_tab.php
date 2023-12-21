@@ -1,3 +1,14 @@
+<?php
+include "backend/dbconnect.php";
+session_start();
+$user_id_session = $_SESSION['name'];
+if (empty($_SESSION['name'])) {
+    header("location: index.php?error=login firist");
+}
+$sql = "select user_image , name from user_login where id = $user_id_session";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,8 +85,18 @@
             <ul class="navbar-nav flex-row d-none d-md-flex d-sm-none">
                 <li class="nav-item me-md-1 me-lg-1  d-sm-none  d-lg-flex d-md-flex">
                     <a class="nav-link d-sm-none  d-lg-flex d-md-flex " href="#">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp" class="rounded-circle" height="30" alt="Black and White Portrait of a Man" loading="lazy" />
-                        <strong class="username d-none d-sm-none  d-lg-block d-md-block ms-1">John</strong>
+                        <!-- user image retrive from database using session using id -->
+                        <img src="<?php
+                                    $user_image_file = $row['user_image'];
+                                    echo "user_image/$user_image_file";
+                                    ?>" class="rounded-circle" height="30" alt="Black and White Portrait of a Man" loading="lazy" />
+                        <!-- ------------------------------------------------------------------- -->
+                        <strong class="username d-none d-sm-none  d-lg-block d-md-block ms-1">
+                            <?php
+                            $user_name_file = $row['name'];
+                            echo "$user_name_file";
+                            ?>
+                        </strong>
                     </a>
                 </li>
             </ul>
@@ -100,8 +121,18 @@
                         </li>
                         <li class="nav-item me-3 me-lg-3">
                             <a class="nav-link d-sm-flex align-items-sm-center" href="#">
-                                <img src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp" class="rounded-circle" height="30" alt="Black and White Portrait of a Man" loading="lazy" />
-                                <strong class="username  d-sm-block ms-1">John</strong>
+                                <!-- user image retrive from database using session using id -->
+                                <img src="<?php
+                                            $user_image_file = $row['user_image'];
+                                            echo "user_image/$user_image_file";
+                                            ?>" class="rounded-circle" height="30" alt="Black and White Portrait of a Man" loading="lazy" />
+                                <!-- ------------------------------------------------------------------- -->
+                                <strong class="username  d-sm-block ms-1">
+                                    <?php
+                                    $user_name_file = $row['name'];
+                                    echo "$user_name_file";
+                                    ?>
+                                </strong>
                             </a>
                         </li>
                     </ul>

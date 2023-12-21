@@ -58,7 +58,7 @@ if (isset($_POST['name']) && isset($_POST['password']) && isset($_POST['confirm_
       $tempname = $_FILES["uploadimage"]["tmp_name"];
       $folder = "../user_image/$filename";
       //database inseration
-      $sql = "insert into user_login (usar_image,username ,password ,name ,is_doctor) values ('$filename','$username' ,'$password' ,'$username' ,$user_type)";
+      $sql = "insert into user_login (user_image,username ,password ,name ,is_doctor) values ('$filename','$username' ,'$password' ,'$username' ,$user_type)";
       if (mysqli_query($conn, $sql)) {
         // ---------------------------------------------------------- save photo into folder
         move_uploaded_file($tempname, $folder);

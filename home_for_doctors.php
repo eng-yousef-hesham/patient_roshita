@@ -22,8 +22,8 @@ $row = mysqli_fetch_assoc($result);
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/all.min.css">
     <!-- --------------------- -->
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/home_style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="imgs/logo.webp" type="image/x-icon" />
     <title>Document</title>
 </head>
@@ -51,21 +51,21 @@ $row = mysqli_fetch_assoc($result);
                 <li class="nav-item me-1 me-lg-1 active">
                     <a class="nav-link" href="home_for_doctors.php">
                         <span><i class="fas fa-home fa-lg fa-2xl"></i></span>
-                        <h6>home</h6>
+                        <p>home</p>
                     </a>
                 </li>
 
                 <li class="nav-item me-1 me-lg-1">
                     <a class="nav-link" href="#">
                         <span><i class="fa-solid fa-hospital-user fa-2xl"></i></span>
-                        <h6 class="h6edit">patient</h6>
+                        <p class="h6edit">patient</p>
                     </a>
                 </li>
                 <li class="nav-item me-1 me-lg-1">
                     <a class="nav-link" href="#">
                         <span><i class="fa-solid fa-gear fa-2xl"></i></span>
 
-                        <h6 class="h6edit">settings</h6>
+                        <p class="h6edit">settings</p>
                     </a>
                 </li>
             </ul>
@@ -77,10 +77,27 @@ $row = mysqli_fetch_assoc($result);
                 <li class="nav-item me-md-1 me-lg-1  d-sm-none  d-lg-flex d-md-flex">
                     <a class="nav-link d-sm-none  d-lg-flex d-md-flex " href="#">
                         <!-- user image retrive from database using session using id -->
-                        <img src="<?php
-                                    $user_image_file = $row['user_image'];
-                                    echo "user_image/$user_image_file";
-                                    ?>" class="rounded-circle" height="30" alt="Black and White Portrait of a Man" loading="lazy" />
+                        <!-- photo and logout -->
+                        <div class="btn-group dropstart">
+                            <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="<?php
+                                            if (empty($row["user_image"])) {
+                                                echo "imgs/user.jpg";
+                                            } else {
+                                                $user_image_file = $row['user_image'];
+                                                echo "user_image/$user_image_file";
+                                            }
+                                            ?>" class="rounded-circle" height="30" alt="Black and White Portrait of a Man" loading="lazy" />
+                            </a>
+                            <ul class="dropdown-menu ">
+                                <!-- logout button -->
+                                <li><a class="dropdown-item dropdownitemcss" href="backend/logout.php">logout</a></li>
+                                <li><a class="dropdown-item dropdownitemcss" href="backend/delete_account.php">delete account</a></li>
+                                <!-- ------------- -->
+                            </ul>
+                        </div>
+
+                        <!-- ------------------------------------------------------------------- -->
                         <!-- ------------------------------------------------------------------- -->
                         <strong class="username d-none d-sm-none  d-lg-block d-md-block ms-1">
                             <?php
@@ -110,10 +127,25 @@ $row = mysqli_fetch_assoc($result);
                         <li class="nav-item me-3 me-lg-3">
                             <a class="nav-link d-sm-flex align-items-sm-center" href="#">
                                 <!-- user image retrive from database using session using id -->
-                                <img src="<?php
-                                            $user_image_file = $row['user_image'];
-                                            echo "user_image/$user_image_file";
-                                            ?>" class="rounded-circle" height="30" alt="Black and White Portrait of a Man" loading="lazy" />
+                                <!-- photo and logout -->
+                                <div class="btn-group dropstart">
+                                    <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="<?php
+                                                    if (empty($row["user_image"])) {
+                                                        echo "imgs/user.jpg";
+                                                    } else {
+                                                        $user_image_file = $row['user_image'];
+                                                        echo "user_image/$user_image_file";
+                                                    }
+                                                    ?>" class="rounded-circle" height="30" alt="" loading="lazy" />
+                                    </a>
+                                    <ul class="dropdown-menu ">
+                                        <!-- logout button -->
+                                        <li><a class="dropdown-item dropdownitemcss" href="backend/logout.php">logout</a></li>
+                                        <li><a class="dropdown-item dropdownitemcss" href="backend/delete_account.php">delete account</a></li>
+                                        <!-- ------------- -->
+                                    </ul>
+                                </div>
                                 <!-- ------------------------------------------------------------------- -->
                                 <strong class="username  d-sm-block ms-1">
                                     <?php

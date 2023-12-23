@@ -5,9 +5,22 @@ $user_id_session = $_SESSION['name'];
 if (empty($_SESSION['name'])) {
     header("location: index.php?error=login firist");
 }
-$sql = "select user_image , name from user_login where id = $user_id_session";
+$sql = "select id , user_image , name from user_login where id = $user_id_session";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
+// -------------------
+// show unchecked doctors only from database
+$sql1 = "select * from user_login where is_doctor = 1 and id not in (select dr_access from patient where user_id = $user_id_session AND dr_access IS NOT NULL)";
+$result1 = mysqli_query($conn, $sql1);
+// -------------------------------
+// show unchecked doctors only from database
+$sql2 = "select * from user_login where is_doctor = 1 and id in (select dr_access from patient where user_id = $user_id_session AND dr_access IS NOT NULL)";
+$result2 = mysqli_query($conn, $sql2);
+// -----------------------------------------
+// show numper of doctors
+$sql3 = "select count(*) from patient where user_id = $user_id_session and dr_access IS NOT NULL";
+$result3 = mysqli_query($conn, $sql3);
+// ----------------------
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,21 +64,21 @@ $row = mysqli_fetch_assoc($result);
                 <li class="nav-item me-1 me-lg-1 active">
                     <a class="nav-link" href="home.php">
                         <span><i class="fas fa-home fa-lg fa-2xl"></i></span>
-                        <h6>home</h6>
+                        <p>home</p>
                     </a>
                 </li>
 
                 <li class="nav-item me-1 me-lg-1">
                     <a class="nav-link" href="doctors_tab.php">
                         <span><i class="fa-solid fa-user-doctor fa-2xl"></i></span>
-                        <h6 class="h6edit">doctors</h6>
+                        <p class="h6edit">doctors</p>
                     </a>
                 </li>
 
                 <li class="nav-item me-1 me-lg-1">
                     <a class="nav-link" href="#">
                         <span><i class="fa-solid fa-prescription-bottle-medical fa-2xl"></i></span>
-                        <h6 class="h6edit">prescription</h6>
+                        <p class="h6edit">prescription</p>
                     </a>
                 </li>
 
@@ -74,7 +87,7 @@ $row = mysqli_fetch_assoc($result);
                     <a class="nav-link" href="#">
                         <span><i class="fa-solid fa-gear fa-2xl"></i></span>
 
-                        <h6 class="h6edit">settings</h6>
+                        <p class="h6edit">settings</p>
                     </a>
                 </li>
             </ul>
@@ -86,11 +99,28 @@ $row = mysqli_fetch_assoc($result);
                 <li class="nav-item me-md-1 me-lg-1  d-sm-none  d-lg-flex d-md-flex">
                     <a class="nav-link d-sm-none  d-lg-flex d-md-flex " href="#">
                         <!-- user image retrive from database using session using id -->
-                        <img src="<?php
-                                    $user_image_file = $row['user_image'];
-                                    echo "user_image/$user_image_file";
-                                    ?>" class="rounded-circle" height="30" alt="Black and White Portrait of a Man" loading="lazy" />
+                        <!-- photo and logout -->
+                        <div class="btn-group dropstart">
+                            <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="<?php
+                                            if (empty($row["user_image"])) {
+                                                echo "imgs/user.jpg";
+                                            } else {
+                                                $user_image_file = $row['user_image'];
+                                                echo "user_image/$user_image_file";
+                                            }
+                                            ?>" class="rounded-circle" height="30" alt="" loading="lazy" />
+                            </a>
+                            <ul class="dropdown-menu ">
+                                <!-- logout button -->
+                                <li><a class="dropdown-item dropdownitemcss" href="backend/logout.php">logout</a></li>
+                                <li><a class="dropdown-item dropdownitemcss" href="backend/delete_account.php">delete account</a></li>
+                                <!-- ------------- -->
+                            </ul>
+                        </div>
+
                         <!-- ------------------------------------------------------------------- -->
+
                         <strong class="username d-none d-sm-none  d-lg-block d-md-block ms-1">
                             <?php
                             $user_name_file = $row['name'];
@@ -122,10 +152,25 @@ $row = mysqli_fetch_assoc($result);
                         <li class="nav-item me-3 me-lg-3">
                             <a class="nav-link d-sm-flex align-items-sm-center" href="#">
                                 <!-- user image retrive from database using session using id -->
-                                <img src="<?php
-                                            $user_image_file = $row['user_image'];
-                                            echo "user_image/$user_image_file";
-                                            ?>" class="rounded-circle" height="30" alt="Black and White Portrait of a Man" loading="lazy" />
+                                <!-- photo and logout -->
+                                <div class="btn-group dropstart">
+                                    <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="<?php
+                                                    if (empty($row["user_image"])) {
+                                                        echo "imgs/user.jpg";
+                                                    } else {
+                                                        $user_image_file = $row['user_image'];
+                                                        echo "user_image/$user_image_file";
+                                                    }
+                                                    ?>" class="rounded-circle" height="30" alt="" loading="lazy" />
+                                    </a>
+                                    <ul class="dropdown-menu ">
+                                        <!-- logout button -->
+                                        <li><a class="dropdown-item dropdownitemcss" href="backend/logout.php">logout</a></li>
+                                        <li><a class="dropdown-item dropdownitemcss" href="backend/delete_account.php">delete account</a></li>
+                                        <!-- ------------- -->
+                                    </ul>
+                                </div>
                                 <!-- ------------------------------------------------------------------- -->
                                 <strong class="username  d-sm-block ms-1">
                                     <?php
@@ -146,112 +191,105 @@ $row = mysqli_fetch_assoc($result);
     <!-- ------------------------------Navbar end ----------------------->
 
     <!-- ---------------------------------------doctors tap----------------------------------- -->
-    <div class="doctor_tab">
-        <div class="doctor_element">
-            <img src="imgs/doctor01.jpg" alt="">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis quisquam, cumque sequi iure dolore
-                veniam eum nemo consectetur voluptate neque reiciendis ipsa in fugit, sit libero odio omnis. Asperiores,
-                consectetur?</p>
-
-
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
+    <!-- checked_cards_container -->
+    <div class="checked_cards_container">
+        <div class="main-title mt-5 mb-5 position-relative">
+            <h2>who have access</h2>
+            <p class="text-black-50 text-uppercase">here you can find a doctor who have <br> ability to write your roshite now <br> only 6 doctors</p>
         </div>
-        <div class="doctor_element">
-            <img src="imgs/doctor02.jpg" alt="">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis quisquam, cumque sequi iure dolore
-                veniam eum nemo consectetur voluptate neque reiciendis ipsa in fugit, sit libero odio omnis. Asperiores,
-                consectetur?</p>
-
-
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
+        <!-- show the numper of doctors who have access -->
+        <div>
+            <?php $row3 = mysqli_fetch_array($result3); ?>
+            <h4 class="progress_text">
+                You have given access to <?php echo $row3["count(*)"]; ?> from 6 chances
+            </h4>
+            <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="calc((<?php echo $row3["count(*)"] ?>/6)*100%)" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar" style="width: calc((<?php echo $row3["count(*)"] ?>/6)*100%)"><?php echo $row3["count(*)"] ?></div>
+            </div>
         </div>
-        <div class="doctor_element">
-            <img src="imgs/doctor05.jpg" alt="">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis quisquam, cumque sequi iure dolore
-                veniam eum nemo consectetur voluptate neque reiciendis ipsa in fugit, sit libero odio omnis. Asperiores,
-                consectetur?</p>
+        <!-- ------------------------------------------------ -->
 
-
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
+        <div class="row row-cols-1 row-cols-md-3 g-0">
+            <?php while ($row2 = mysqli_fetch_assoc($result2)) { ?>
+                <div class="col">
+                    <div class="card">
+                        <img src="<?php
+                                    if (empty($row2["user_image"])) {
+                                        echo "imgs/user.jpg";
+                                    } else {
+                                        $user_image_file = $row2['user_image'];
+                                        echo "user_image/$user_image_file";
+                                        // to make it empty
+                                        $user_image_file = "";
+                                    }
+                                    ?>" class="card-img-top" alt="Skyscrapers" />
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo $row2['name']; ?></h5>
+                            <p class="card-text">
+                                This is a longer card with supporting text below as a natural lead-in to
+                                additional content. This content is a little bit longer.
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="d-grid gap-2 d-md-block">
+                                <!-- remove access by send id for doctor from this quary and patient from this session to remove_access.php-->
+                                <form action="backend/remove_access.php" method="post">
+                                    <input type="numper" name="id_num_patient" hidden value="<?php echo $user_id_session ?>">
+                                    <input type="numper" name="id_num_doctor" hidden value="<?php echo $row2['id']; ?>">
+                                    <button class="btn btn-primary" type="submit">remove access</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
         </div>
-        <div class="doctor_element">
-            <img src="imgs/doctor07.jpg" alt="">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis quisquam, cumque sequi iure dolore
-                veniam eum nemo consectetur voluptate neque reiciendis ipsa in fugit, sit libero odio omnis. Asperiores,
-                consectetur?</p>
+    </div>
 
-
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
+    <!-- -------------------------------------------------------------------------- -->
+    <!-- unchecked_cards_container -->
+    <div class="unchecked_cards_container">
+        <div class="main-title mt-5 mb-5 position-relative">
+            <h2>give doctor access</h2>
+            <p class="text-black-50 text-uppercase">give access to doctor to make him <br> able to write your roshite</p>
         </div>
-        <div class="doctor_element">
-            <img src="imgs/doctor03.jpg" alt="">
-
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis quisquam, cumque sequi iure dolore
-                veniam eum nemo consectetur voluptate neque reiciendis ipsa in fugit, sit libero odio omnis. Asperiores,
-                consectetur?</p>
-
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
+        <div class="row row-cols-1 row-cols-md-3 g-0">
+            <!-- retrive unchecked doctor data from database -->
+            <?php while ($row1 = mysqli_fetch_assoc($result1)) { ?>
+                <div class="col">
+                    <div class="card">
+                        <img src="<?php
+                                    if (empty($row1["user_image"])) {
+                                        echo "imgs/user.jpg";
+                                    } else {
+                                        $user_image_file = $row1['user_image'];
+                                        echo "user_image/$user_image_file";
+                                        // to make it empty
+                                        $user_image_file = "";
+                                    }
+                                    ?> " class="card-img-top" alt="Skyscrapers" />
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo $row1['name']; ?></h5>
+                            <p class="card-text">
+                                This is a longer card with supporting text below as a natural lead-in to
+                                additional content. This content is a little bit longer.
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="d-grid gap-2 d-md-block">
+                                <!-- give access by send id for doctor from this quary and patient from this session to give_access.php -->
+                                <form action="backend/give_access.php" method="post">
+                                    <input type="numper" name="id_num_patient" hidden value="<?php echo $user_id_session ?>">
+                                    <input type="numper" name="id_num_doctor" hidden value="<?php echo $row1['id']; ?>">
+                                    <button class="btn btn-primary" type="submit">give access</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+            <!-- --------------------------------- -->
         </div>
-        <div class="doctor_element">
-            <img src="imgs/doctor06.jpg" alt="">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis quisquam, cumque sequi iure dolore
-                veniam eum nemo consectetur voluptate neque reiciendis ipsa in fugit, sit libero odio omnis. Asperiores,
-                consectetur?</p>
-
-
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-        </div>
-        <div class="doctor_element">
-            <img src="imgs/doctor04.jpg" alt="">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis quisquam, cumque sequi iure dolore
-                veniam eum nemo consectetur voluptate neque reiciendis ipsa in fugit, sit libero odio omnis. Asperiores,
-                consectetur?</p>
-
-
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-        </div>
-        <div class="doctor_element">
-            <img src="imgs/doctor08.jpg" alt="">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis quisquam, cumque sequi iure dolore
-                veniam eum nemo consectetur voluptate neque reiciendis ipsa in fugit, sit libero odio omnis. Asperiores,
-                consectetur?</p>
-
-
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
-        </div>
-        <p class="clear"></p>
     </div>
     <!-- ------------------------------------------------- -->
 

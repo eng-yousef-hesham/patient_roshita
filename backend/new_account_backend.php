@@ -64,18 +64,15 @@ if (isset($_POST['name']) && isset($_POST['password']) && isset($_POST['confirm_
         move_uploaded_file($tempname, $folder);
         // -----------------------------------------------------------------------------
         if ($user_type == 0) {
-          // add to patient taple
+          //no add to patient taple because this table for only check doctor access
           $sql1 = "select id from user_login where username like '$username'";
           $result = mysqli_query($conn, $sql1);
           $row = mysqli_fetch_assoc($result);
           $id_numper = $row["id"];
-          $sql2 = "insert into patient (user_id ) values ( $id_numper)";
-          if (mysqli_query($conn, $sql2)) {
-            if (empty($_FILES["uploadimage"]["name"])) {
-              header("location: ../index.php?done=successfully sign up , add your photo later");
-            } else {
-              header("location: ../index.php?done=successfully sign up");
-            }
+          if (empty($_FILES["uploadimage"]["name"])) {
+            header("location: ../index.php?done=successfully sign up , add your photo later");
+          } else {
+            header("location: ../index.php?done=successfully sign up");
           }
           // --------------------------------------------
         } elseif ($user_type == 1) {

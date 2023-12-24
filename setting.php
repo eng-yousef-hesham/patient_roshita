@@ -23,7 +23,7 @@ $row = mysqli_fetch_assoc($result);
     <link rel="stylesheet" href="css/all.min.css">
     <!-- --------------------- -->
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/home_style.css">
+    <link rel="stylesheet" href="css/setting_style.css">
     <link rel="shortcut icon" href="imgs/logo.webp" type="image/x-icon" />
     <title>Document</title>
 </head>
@@ -68,6 +68,7 @@ $row = mysqli_fetch_assoc($result);
                         <p class="h6edit">prescription</p>
                     </a>
                 </li>
+
 
                 <li class="nav-item me-1 me-lg-1">
                     <a class="nav-link" href="setting.php">
@@ -175,8 +176,77 @@ $row = mysqli_fetch_assoc($result);
         </div>
     </nav>
     <!-- ------------------------------Navbar end ----------------------->
-    <!-- home -->
+    <!-- body -->
+    <!-- alerts -->
+    <?php if (isset($_GET['error']) || isset($_GET['done'])) { ?>
+        <div class="toast show">
+            <div class="toast-header">
+                done
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body">
+                <!-- show error -->
+                <?php if (isset($_GET['error'])) { ?>
+                    <p class="error"><?php echo $_GET['error']; ?></p>
+                <?php } ?>
+                <!-- ----------------------------------------- -->
+                <!-- show successfil sign up -->
+                <?php if (isset($_GET['done'])) { ?>
+                    <p class="done"><?php echo $_GET['done']; ?></p>
+                <?php } ?>
+                <!-- ----------------------------------------- -->
+            </div>
+        </div>
+    <?php } ?>
 
+    <!-- -------------- -->
+    <div class="row  g-0">
+        <div class="col-md-3 user-image-div col-sm-12">
+            <img class="user-image" src="<?php
+                                            if (empty($row["user_image"])) {
+                                                echo "imgs/user.jpg";
+                                            } else {
+                                                $user_image_file = $row['user_image'];
+                                                echo "user_image/$user_image_file";
+                                            }
+                                            ?>" alt="user image">
+        </div>
+        <div class="col-md-9 col-sm-12">
+            <div class="form_style_h3">
+                <h3> your id is : <?php echo $user_id_session; ?></h3>
+                <h3> username is : <?php
+                                    $user_name_file = $row['username'];
+                                    echo "$user_name_file";
+                                    ?>
+                </h3>
+                <h3>account name : <?php
+                                    $user_name_file = $row['name'];
+                                    echo "$user_name_file";
+                                    ?>
+                </h3>
+                <!-- backend file for doctors and patient -->
+                <a href="backend/reset_password.php" class="reset_password_btn btn btn-primary btn-block mb-4"> reset password</a>
+                <!-- ------------------------------------ -->
+            </div>
+        </div>
+        <div class="col-md-2 form_style col-sm-1">
+        </div>
+        <div class="col-md-9 form_style col-sm-10">
+            <form action="backend/update_data.php" method="post" enctype="multipart/form-data">
+                <div class="form-outline mb-4">
+                    <label for="form_user_image" class="form-label">Add your photo or change it</label>
+                    <input class="form-control" id="form_user_image" type="file" name="uploadimage" value="" />
+                </div>
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="name">changr account name </label>
+                    <input type="text" name="name" id="name" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mb-4">update</button>
+            </form>
+        </div>
+        <div class="col-md-1 form_style col-sm-10">
+        </div>
+    </div>
     <!-- ----------------------------------- -->
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/all.min.js"></script>

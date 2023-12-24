@@ -22,8 +22,8 @@ $row = mysqli_fetch_assoc($result);
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/all.min.css">
     <!-- --------------------- -->
+    <link rel="stylesheet" href="css/setting_for_doctors_style.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/home_style.css">
     <link rel="shortcut icon" href="imgs/logo.webp" type="image/x-icon" />
     <title>Document</title>
 </head>
@@ -49,28 +49,20 @@ $row = mysqli_fetch_assoc($result);
             <!-- Center elements -->
             <ul class="navbar-nav flex-row d-none d-md-flex d-sm-none">
                 <li class="nav-item me-1 me-lg-1 active">
-                    <a class="nav-link" href="home.php">
+                    <a class="nav-link" href="home_for_doctors.php">
                         <span><i class="fas fa-home fa-lg fa-2xl"></i></span>
                         <p>home</p>
                     </a>
                 </li>
 
                 <li class="nav-item me-1 me-lg-1">
-                    <a class="nav-link" href="doctors_tab.php">
-                        <span><i class="fa-solid fa-user-doctor fa-2xl"></i></span>
-                        <p class="h6edit">doctors</p>
+                    <a class="nav-link" href="#">
+                        <span><i class="fa-solid fa-hospital-user fa-2xl"></i></span>
+                        <p class="h6edit">patient</p>
                     </a>
                 </li>
-
                 <li class="nav-item me-1 me-lg-1">
-                    <a class="nav-link" href="prescription.php">
-                        <span><i class="fa-solid fa-prescription-bottle-medical fa-2xl"></i></span>
-                        <p class="h6edit">prescription</p>
-                    </a>
-                </li>
-
-                <li class="nav-item me-1 me-lg-1">
-                    <a class="nav-link" href="setting.php">
+                    <a class="nav-link" href="setting_for_doctors.php">
                         <span><i class="fa-solid fa-gear fa-2xl"></i></span>
 
                         <p class="h6edit">settings</p>
@@ -95,7 +87,7 @@ $row = mysqli_fetch_assoc($result);
                                                 $user_image_file = $row['user_image'];
                                                 echo "user_image/$user_image_file";
                                             }
-                                            ?>" class="rounded-circle" height="30" alt="" loading="lazy" />
+                                            ?>" class="rounded-circle" height="30" alt="Black and White Portrait of a Man" loading="lazy" />
                             </a>
                             <ul class="dropdown-menu ">
                                 <!-- logout button -->
@@ -106,7 +98,7 @@ $row = mysqli_fetch_assoc($result);
                         </div>
 
                         <!-- ------------------------------------------------------------------- -->
-
+                        <!-- ------------------------------------------------------------------- -->
                         <strong class="username d-none d-sm-none  d-lg-block d-md-block ms-1">
                             <?php
                             $user_name_file = $row['name'];
@@ -124,16 +116,13 @@ $row = mysqli_fetch_assoc($result);
                 <div class="collapse navbar-collapse d-lg-none d-md-none" id="main">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-lg-none">
                         <li class="nav-item">
-                            <a class="nav-link d-lg-none d-md-none" aria-current="page" href="home.php"><span><i class="fas fa-home fa-lg fa-2xs"></i> Home</span></a>
+                            <a class="nav-link d-lg-none d-md-none" aria-current="page" href="home_for_doctors.php"><span><i class="fas fa-home fa-lg fa-2xs"></i> Home</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link d-lg-none d-md-none" href="doctors_tab.php"><span><i class="fa-solid fa-user-doctor fa-lg fa-2xs"></i> doctors</span></a>
+                            <a class="nav-link d-lg-none d-md-none" href="#contact_me"><span><i class="fa-solid fa-hospital-user fa-lg fa-2xs"></i> patient</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link d-lg-none d-md-none" href="prescription.php"><span><i class="fa-solid fa-prescription-bottle-medical fa-lg fa-2xs"></i> prescription</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link d-lg-none d-md-none" href="setting.php"><span><i class="fa-solid fa-gear fa-lg fa-2xs"></i> settings</span></a>
+                            <a class="nav-link d-lg-none d-md-none" href="setting_for_doctors.php"><span><i class="fa-solid fa-gear fa-lg fa-2xs"></i> settings</span></a>
                         </li>
                         <li class="nav-item me-3 me-lg-3">
                             <a class="nav-link d-sm-flex align-items-sm-center" href="#">
@@ -175,8 +164,85 @@ $row = mysqli_fetch_assoc($result);
         </div>
     </nav>
     <!-- ------------------------------Navbar end ----------------------->
-    <!-- home -->
+    <!-- body -->
+    <!-- alerts -->
+    <?php if (isset($_GET['error']) || isset($_GET['done'])) { ?>
+        <div class="toast show">
+            <div class="toast-header">
+                done
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body">
+                <!-- show error -->
+                <?php if (isset($_GET['error'])) { ?>
+                    <p class="error"><?php echo $_GET['error']; ?></p>
+                <?php } ?>
+                <!-- ----------------------------------------- -->
+                <!-- show successfil sign up -->
+                <?php if (isset($_GET['done'])) { ?>
+                    <p class="done"><?php echo $_GET['done']; ?></p>
+                <?php } ?>
+                <!-- ----------------------------------------- -->
+            </div>
+        </div>
+    <?php } ?>
 
+    <!-- -------------- -->
+    <div class="row  g-0">
+        <div class="col-md-3 user-image-div col-sm-12">
+            <img class="user-image" src="<?php
+                                            if (empty($row["user_image"])) {
+                                                echo "imgs/user.jpg";
+                                            } else {
+                                                $user_image_file = $row['user_image'];
+                                                echo "user_image/$user_image_file";
+                                            }
+                                            ?>" alt="user image">
+        </div>
+        <div class="col-md-9 col-sm-12">
+            <div class="form_style_h3">
+                <h3> your id is : <?php echo $user_id_session; ?></h3>
+                <h3> username is : <?php
+                                    $user_name_file = $row['username'];
+                                    echo "$user_name_file";
+                                    ?>
+                </h3>
+                <h3>account name : <?php
+                                    $user_name_file = $row['name'];
+                                    echo "$user_name_file";
+                                    ?>
+                </h3>
+                <!-- backend file for doctors and patient -->
+                <a href="backend/reset_password.php" class="reset_password_btn btn btn-primary btn-block mb-4"> reset password</a>
+                <!-- ----------------------------- -->
+            </div>
+        </div>
+        <div class="col-md-2 form_style col-sm-1">
+        </div>
+        <div class="col-md-9 form_style col-sm-10">
+            <form action="backend/update_data_for_doctors.php" method="post" enctype="multipart/form-data">
+                <div class="form-outline mb-4">
+                    <label for="form_user_image" class="form-label">Add your photo or change it</label>
+                    <input class="form-control" id="form_user_image" type="file" name="uploadimage" value="" />
+                </div>
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="name">change account name</label>
+                    <input type="text" name="name" id="name" class="form-control" />
+                </div>
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="specialization">specialization</label>
+                    <input type="text" name="specialization" id="specialization" class="form-control" />
+                </div>
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="description">description</label>
+                    <input type="text" name="description" id="description" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mb-4">update</button>
+            </form>
+        </div>
+        <div class="col-md-1 form_style col-sm-10">
+        </div>
+    </div>
     <!-- ----------------------------------- -->
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/all.min.js"></script>

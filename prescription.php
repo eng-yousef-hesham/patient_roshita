@@ -8,6 +8,9 @@ if (empty($_SESSION['name'])) {
 $sql = "select user_image , name , username from user_login where id = $user_id_session";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
+// select for roshita table database
+$sql2 = "select * from roshita where patient_id = $user_id_session";
+$result2 = mysqli_query($conn, $sql2); 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +26,7 @@ $row = mysqli_fetch_assoc($result);
     <link rel="stylesheet" href="css/all.min.css">
     <!-- --------------------- -->
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/home_style.css">
+    <link rel="stylesheet" href="css/prescription_style.css">
     <link rel="shortcut icon" href="imgs/logo.webp" type="image/x-icon" />
     <title>Document</title>
 </head>
@@ -68,6 +71,7 @@ $row = mysqli_fetch_assoc($result);
                         <p class="h6edit">prescription</p>
                     </a>
                 </li>
+
 
                 <li class="nav-item me-1 me-lg-1">
                     <a class="nav-link" href="setting.php">
@@ -176,10 +180,65 @@ $row = mysqli_fetch_assoc($result);
     </nav>
     <!-- ------------------------------Navbar end ----------------------->
     <!-- home -->
+    <div class="checked_cards_container">
+        <div class="main-title mt-5 mb-5 position-relative">
+            <h2>your prescriptions</h2>
+            <p class="text-black-50 text-uppercase">here you can find your prescriptions <br> help you to be aware of your Medical history</p>
+        </div>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-0">
+    <?php while ($row2 = mysqli_fetch_assoc($result2)) { ?>
+        <div class="col">
+            <div class="card">
+                <div class="rosheta">
+                    <h1>Patient History</h1>
+                    <div class="row  g-0">
+                        <div class="name col-5">
+                            <h4>Doctor</h4>
+                            <h2><?php 
+                            // select doctor name for roshita
+                            $doctor_id_num=$row2['doctor_id'];
+                            $sql3 = "select name from user_login where id = $doctor_id_num";
+                            $result3 = mysqli_query($conn, $sql3);
+                            $row3 = mysqli_fetch_assoc($result3);
+                            echo $row3['name'] ;?></h2>
+                            <!-- ------------------------ -->
+                        </div>
+                        <div class="col-1"></div>
+                        <div class="date col-5">
+                            <h4>Date</h4>
+                            <h2><?php echo $row2['roshita_date']; ?></h2>
+                        </div>
+                        <div class="heart_rate col-5">
+                            <h4>heart rate</h4>
+                            <h2><?php echo $row2['heart rate']; ?></h2>
+                        </div>
+                        <div class="col-1"></div>
+                        <div class="blood_pressure col-5">
+                            <h4>blood pressure</h4>
+                            <h2><?php echo $row2['systolic_blood_pressure']; ?> / <?php echo $row2['diastolic_blood_pressure']; ?></h2>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title"></h5>
+                            <h2 class="history">History</h2>
+                            <p class="card-text">
+                            <?php echo $row2['roshita']; ?>
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="d-grid gap-2 d-md-block">
 
-    <!-- ----------------------------------- -->
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/all.min.js"></script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php }?>
+    </div>
+            <!-- ----------------------------------- -->
+            <script src="js/bootstrap.bundle.min.js"></script>
+            <script src="js/all.min.js"></script>
 </body>
 
 </html>

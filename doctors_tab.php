@@ -13,7 +13,7 @@ $row = mysqli_fetch_assoc($result);
 $sql1 = "select * from user_login where is_doctor = 1 and id not in (select dr_access from patient where user_id = $user_id_session AND dr_access IS NOT NULL)";
 $result1 = mysqli_query($conn, $sql1);
 // -------------------------------
-// show unchecked doctors only from database
+// show checked doctors only from database
 $sql2 = "select * from user_login where is_doctor = 1 and id in (select dr_access from patient where user_id = $user_id_session AND dr_access IS NOT NULL)";
 $result2 = mysqli_query($conn, $sql2);
 // -----------------------------------------
@@ -76,7 +76,7 @@ $result3 = mysqli_query($conn, $sql3);
                 </li>
 
                 <li class="nav-item me-1 me-lg-1">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="prescription.php">
                         <span><i class="fa-solid fa-prescription-bottle-medical fa-2xl"></i></span>
                         <p class="h6edit">prescription</p>
                     </a>
@@ -84,7 +84,7 @@ $result3 = mysqli_query($conn, $sql3);
 
 
                 <li class="nav-item me-1 me-lg-1">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="setting.php">
                         <span><i class="fa-solid fa-gear fa-2xl"></i></span>
 
                         <p class="h6edit">settings</p>
@@ -144,10 +144,10 @@ $result3 = mysqli_query($conn, $sql3);
                             <a class="nav-link d-lg-none d-md-none" href="doctors_tab.php"><span><i class="fa-solid fa-user-doctor fa-lg fa-2xs"></i> doctors</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link d-lg-none d-md-none" href="#contact_me"><span><i class="fa-solid fa-prescription-bottle-medical fa-lg fa-2xs"></i> prescription</span></a>
+                            <a class="nav-link d-lg-none d-md-none" href="#prescription.php"><span><i class="fa-solid fa-prescription-bottle-medical fa-lg fa-2xs"></i> prescription</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link d-lg-none d-md-none" href="#some_links"><span><i class="fa-solid fa-gear fa-lg fa-2xs"></i> settings</span></a>
+                            <a class="nav-link d-lg-none d-md-none" href="setting.php"><span><i class="fa-solid fa-gear fa-lg fa-2xs"></i> settings</span></a>
                         </li>
                         <li class="nav-item me-3 me-lg-3">
                             <a class="nav-link d-sm-flex align-items-sm-center" href="#">
@@ -191,6 +191,29 @@ $result3 = mysqli_query($conn, $sql3);
     <!-- ------------------------------Navbar end ----------------------->
 
     <!-- ---------------------------------------doctors tap----------------------------------- -->
+    <!-- alerts -->
+    <?php if (isset($_GET['error']) || isset($_GET['done'])) { ?>
+        <div class="toast show">
+            <div class="toast-header">
+                done
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body">
+                <!-- show error -->
+                <?php if (isset($_GET['error'])) { ?>
+                    <p class="error"><?php echo $_GET['error']; ?></p>
+                <?php } ?>
+                <!-- ----------------------------------------- -->
+                <!-- show successfil sign up -->
+                <?php if (isset($_GET['done'])) { ?>
+                    <p class="done"><?php echo $_GET['done']; ?></p>
+                <?php } ?>
+                <!-- ----------------------------------------- -->
+            </div>
+        </div>
+    <?php } ?>
+
+    <!-- -------------- -->
     <!-- checked_cards_container -->
     <div class="checked_cards_container">
         <div class="main-title mt-5 mb-5 position-relative">
@@ -222,7 +245,7 @@ $result3 = mysqli_query($conn, $sql3);
                                         // to make it empty
                                         $user_image_file = "";
                                     }
-                                    ?>" class="card-img-top" alt="Skyscrapers" />
+                                    ?>" class="card-img-top" alt="doctor photo" />
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $row2['name']; ?></h5>
                             <p class="card-text">
@@ -267,7 +290,7 @@ $result3 = mysqli_query($conn, $sql3);
                                         // to make it empty
                                         $user_image_file = "";
                                     }
-                                    ?> " class="card-img-top" alt="Skyscrapers" />
+                                    ?> " class="card-img-top" alt="doctor photo" />
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $row1['name']; ?></h5>
                             <p class="card-text">

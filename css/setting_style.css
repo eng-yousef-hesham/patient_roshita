@@ -1,0 +1,37 @@
+.user-image {
+    width: 90%;
+    height: 100%;
+    margin: 10px;
+    border-radius: 300px;
+}
+
+.user-image-div {
+    display: flex;
+    justify-content: center;
+}
+
+.form_style {
+    margin-top: 40px;
+}
+
+.form_style_h3 {
+    margin-left: 5%;
+    margin-top: 10%;
+}
+
+.form_style_h3 h3 {
+    margin: 10px;
+}
+/* toasts */
+.toast{
+    text-align: center;
+    width: 100%;
+    display: flex;
+}
+.toast .button{
+    display: flex;
+}
+/* --------- */
+.reset_password_btn{
+    background-color: rgb(140, 0, 0);
+}

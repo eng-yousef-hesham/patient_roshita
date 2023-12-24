@@ -5,7 +5,7 @@ $user_id_session = $_SESSION['name'];
 if (empty($_SESSION['name'])) {
     header("location: index.php?error=login firist");
 }
-$sql = "select user_image , name from user_login where id = $user_id_session";
+$sql = "select user_image , name , username from user_login where id = $user_id_session";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 ?>
@@ -62,7 +62,7 @@ $row = mysqli_fetch_assoc($result);
                     </a>
                 </li>
                 <li class="nav-item me-1 me-lg-1">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="setting_for_doctors.php">
                         <span><i class="fa-solid fa-gear fa-2xl"></i></span>
 
                         <p class="h6edit">settings</p>
@@ -122,7 +122,7 @@ $row = mysqli_fetch_assoc($result);
                             <a class="nav-link d-lg-none d-md-none" href="#contact_me"><span><i class="fa-solid fa-hospital-user fa-lg fa-2xs"></i> patient</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link d-lg-none d-md-none" href="#some_links"><span><i class="fa-solid fa-gear fa-lg fa-2xs"></i> settings</span></a>
+                            <a class="nav-link d-lg-none d-md-none" href="setting_for_doctors.php"><span><i class="fa-solid fa-gear fa-lg fa-2xs"></i> settings</span></a>
                         </li>
                         <li class="nav-item me-3 me-lg-3">
                             <a class="nav-link d-sm-flex align-items-sm-center" href="#">

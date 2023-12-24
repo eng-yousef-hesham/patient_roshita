@@ -18,7 +18,9 @@
     transition: top ease 0.6s; 
     width: 97%;
     margin-left: 10px;
+    margin-top: 25px;
     margin-bottom: 30px;
+    box-shadow: 5px 5px 10px 5px #0d6efd82;
 }
 
 .card h5{
@@ -27,12 +29,18 @@
     top: -40px;
     
 }
+.card h5{
+    text-align: center;
+    
+    
+}
 .card img{
     position: relative;
     top: 0;
     border-style: initial;
     transition: top ease 0.5s;
     z-index: 2;
+    height: 500px;
 }
 .card img:hover{
     top: -30px
@@ -40,6 +48,16 @@
 .card button{
     background-color: rgb(0, 48, 91);
 }
+/* toasts */
+.toast{
+    text-align: center;
+    width: 100%;
+    display: flex;
+}
+.toast .button{
+    display: flex;
+}
+/* --------- */
 /* .unchecked_cards_container */
 .unchecked_cards{
     display: flex;
@@ -48,7 +66,7 @@
     padding-top: 30px;
 }
 .unchecked_cards_container{
-    background-color: rgba(255, 212, 181, 0.374);
+    background-color: rgb(0 50 121 / 34%);
 } 
 .main-title{
     text-align: center;

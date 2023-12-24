@@ -8,7 +8,7 @@ if (isset($_POST["id_num_patient"]) && isset($_POST["id_num_doctor"])) {
     $result3 = mysqli_query($conn, $sql3);
     $row3 = mysqli_fetch_array($result3);
     if ($row3['count(*)'] >= 6) {
-        header("location: ../doctors_tab.php?done= you arrived to the maxmum numper of doctor that you can give access");
+        header("location: ../doctors_tab.php?error= you arrived to the maxmum numper of doctor that you can give access");
         exit; }
         else {
         // ---------------------------------------------

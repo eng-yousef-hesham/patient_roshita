@@ -71,5 +71,4 @@ if (isset($_POST["delete"])) {
     unset($_SESSION['name']);
     header('location:../index.php?done=the account deleted successfully');
 }
-
 ?>

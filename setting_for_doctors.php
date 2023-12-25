@@ -56,7 +56,7 @@ $row = mysqli_fetch_assoc($result);
                 </li>
 
                 <li class="nav-item me-1 me-lg-1">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="patient_for_doctors.php">
                         <span><i class="fa-solid fa-hospital-user fa-2xl"></i></span>
                         <p class="h6edit">patient</p>
                     </a>
@@ -119,7 +119,7 @@ $row = mysqli_fetch_assoc($result);
                             <a class="nav-link d-lg-none d-md-none" aria-current="page" href="home_for_doctors.php"><span><i class="fas fa-home fa-lg fa-2xs"></i> Home</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link d-lg-none d-md-none" href="#contact_me"><span><i class="fa-solid fa-hospital-user fa-lg fa-2xs"></i> patient</span></a>
+                            <a class="nav-link d-lg-none d-md-none" href="patient_for_doctors.php"><span><i class="fa-solid fa-hospital-user fa-lg fa-2xs"></i> patient</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link d-lg-none d-md-none" href="setting_for_doctors.php"><span><i class="fa-solid fa-gear fa-lg fa-2xs"></i> settings</span></a>

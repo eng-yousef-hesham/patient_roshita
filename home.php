@@ -180,6 +180,190 @@ $row = mysqli_fetch_assoc($result);
     <!-- ----------------------------------- -->
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/all.min.js"></script>
+    <!-- Welcome Section -->
+    <section class="welcome-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="welcome-text">
+                        <h2>HI , <?php
+                                    $user_name_file = $row['name'];
+                                    echo "$user_name_file";
+                                    ?><br>Welcome to Our Healthcare Platform!</h2>
+                        <p>We are delighted to have you here. At Healthray, we are committed to providing you with
+                            top-notch healthcare services. Our platform is designed with simplicity and speed in mind,
+                            ensuring a seamless experience for you.</p>
+                        <p>Explore our site to discover a range of healthcare services tailored to your needs. Your
+                            well-being is our priority.</p>
+                        <button class="btn btn-primary" onclick="scrollToAboutUs()">Learn More About Us</button>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="welcome-image">
+                        <!-- Add your welcome image here -->
+                        <img src="<?php
+                                    if (empty($row["user_image"])) {
+                                        echo "imgs/user.jpg";
+                                    } else {
+                                        $user_image_file = $row['user_image'];
+                                        echo "user_image/$user_image_file";
+                                    }
+                                    ?>" alt="Welcome Image" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Welcome Section -->
+
+    <!-- About Us Section -->
+    <section class="about-us">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2><b>About Us</b></h2>
+                    <p>We Give Patients An Incredible Power To Heal
+                        Healthray is your trusted partner in revolutionizing hospital management with best software
+                        solution. Our hospital management software is designed to manage and optimize every aspect of
+                        healthcare administration, from patient records and billing to staff scheduling and inventory
+                        management. With Healthray’s software, you can enhance the efficiency of your hospital
+                        operations, reduce paperwork, and improve the overall quality of patient care.</p>
+
+                    The clinic management system helps doctors in the following ways:
+                    <ul>
+                        <li>Enhanced medical practice.</li>
+                        <li>Manage patient details.</li>
+                        <li>Helps to organize the clinic very well</li>
+                        <li>Status of appointments.</li>
+                        <li>Send messages for updates.</li>
+                        <li>Helps to organize your clinic.</li>
+                        <li>Reduce handwritten errors.</li>
+                        <li>Better quality of work.</li>
+                        <li>Improves teamwork.</li>
+                    </ul>
+
+                    <!-- Add more content about your system, such as its purpose, features, etc. -->
+                </div>
+                <div class="col-lg-6">
+                    <!-- Add an image or any other relevant content -->
+                    <img src="imgs/home4.jpg" alt="About Us Image" class="img-fluid">
+                </div>
+                <button class="btn btn-primary" onclick="scrollToSection('our-services')">Explore Our Services</button>
+
+            </div>
+        </div>
+    </section>
+    <!-- End About Us Section -->
+
+    <!-- Our Services Section -->
+    <section class="our-services" id="our-services">
+        <div class="container">
+            <h2><b>Our Services</b></h2>
+            <div class="row">
+                <!-- Service Card 1 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <i class="fa-solid fa-hospital-user fa-2xl"></i>
+                            <h5 class="card-title">The Clinic Management System</h5>
+                            <p class="card-text">The Healthray software for hospitals helps to have quick access to all
+                                the information.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <i class="fa-solid fa-file-invoice fa-2xl"></i>
+                            <h5 class="card-title">The Reception Management</h5>
+                            <p class="card-text">
+                                The Healthray App facility helps to keep all the records, queries, and follow-ups at
+                                your fingertips.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <i class="fa-solid fa-rectangle-list fa-2xl"></i>
+                            <h5 class="card-title">The Discharge Summary Of Patient</h5>
+                            <p class="card-text">The Healthray App gives a discharge summary of each patient and is also
+                                easily accessible.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="scrollToSection('our-process')">Discover Our Process</button>
+
+            </div>
+
+        </div>
+
+    </section>
+    <!-- End Our Services Section -->
+
+    <!-- Our Best Working Process Section -->
+    <section class="our-process" id="our-process">
+        <div class="container">
+            <h2><b>Our Best Working Process</b></h2>
+            <div class="row">
+                <!-- Process Step 1 -->
+                <div class="col-md-4">
+                    <div class="process-step">
+                        <img src="imgs/home2.jpg" alt="Step 1 Image" class="img-fluid">
+                        <p><b>Add Patient</b></p>
+                        <p>Fill out the details of your patient using the reception module or the EMR.</p>
+                    </div>
+                </div>
+
+                <!-- Process Step 2 -->
+                <div class="col-md-4">
+                    <div class="process-step">
+                        <img src="imgs/home3.jpg" alt="Step 2 Image" class="img-fluid">
+                        <p><b>Make An Appointment</b></p>
+                        <p>You can manage your queue fast and remotely from anywhere and on any device with planned
+                            appointments.</p>
+                    </div>
+                </div>
+
+                <!-- Process Step 3 -->
+                <div class="col-md-4">
+                    <div class="process-step">
+                        <img src="imgs/home5.jpg" alt="Step 3 Image" class="img-fluid">
+                        <p><b>Generate Prescription</b></p>
+                        <p>Consult with patients to create a prescription in a few seconds.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Our Best Working Process Section -->
+
+    <script>
+        function scrollToAboutUs() {
+            document.querySelector('.about-us').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    </script>
+    <script>
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+
 </body>
 
 </html>

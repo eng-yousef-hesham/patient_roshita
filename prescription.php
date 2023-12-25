@@ -194,7 +194,7 @@ $result2 = mysqli_query($conn, $sql2);
                     <h1>Patient History</h1>
                     <div class="row  g-0">
                         <div class="name col-5">
-                            <h4>Doctor</h4>
+                            <h4>Doctor : </h4>
                             <h2><?php 
                             // select doctor name for roshita
                             $doctor_id_num=$row2['doctor_id'];
@@ -206,21 +206,21 @@ $result2 = mysqli_query($conn, $sql2);
                         </div>
                         <div class="col-1"></div>
                         <div class="date col-5">
-                            <h4>Date</h4>
+                            <h4>Date : </h4>
                             <h2><?php echo $row2['roshita_date']; ?></h2>
                         </div>
                         <div class="heart_rate col-5">
-                            <h4>heart rate</h4>
+                            <h4>heart rate : </h4>
                             <h2><?php echo $row2['heart rate']; ?></h2>
                         </div>
                         <div class="col-1"></div>
                         <div class="blood_pressure col-5">
-                            <h4>blood pressure</h4>
+                            <h4>blood pressure : </h4>
                             <h2><?php echo $row2['systolic_blood_pressure']; ?> / <?php echo $row2['diastolic_blood_pressure']; ?></h2>
                         </div>
                         <div class="card-body">
                             <h5 class="card-title"></h5>
-                            <h2 class="history">History</h2>
+                            <h2 class="history">Diagnosis</h2>
                             <p class="card-text">
                             <?php echo $row2['roshita']; ?>
                             </p>

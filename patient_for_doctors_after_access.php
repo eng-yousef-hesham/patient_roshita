@@ -2,12 +2,16 @@
 include "backend/dbconnect.php";
 session_start();
 $user_id_session = $_SESSION['name'];
+$id_num_patient =  $_SESSION['patient_id'];
 if (empty($_SESSION['name'])) {
     header("location: index.php?error=login firist");
 }
 $sql = "select user_image , name , username from user_login where id = $user_id_session";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
+// -----------------
+$sql2 = "select * from roshita where patient_id = $id_num_patient";
+$result2 = mysqli_query($conn, $sql2);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,8 +26,7 @@ $row = mysqli_fetch_assoc($result);
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/all.min.css">
     <!-- --------------------- -->
-    <link rel="stylesheet" href="css/home_for_doctors_style.css">
-    <link rel="stylesheet" href="css/home_style.css">
+    <link rel="stylesheet" href="css/patient_for_doctors_after_access_style.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="imgs/logo.webp" type="image/x-icon" />
     <title>Document</title>
@@ -166,178 +169,118 @@ $row = mysqli_fetch_assoc($result);
     </nav>
     <!-- ------------------------------Navbar end ----------------------->
     <!-- home -->
+    <div class="row  g-0">
+        <div class="col-md-1 form_style col-sm-1">
+        </div>
+        <div class="col-md-4  col-sm-10">
+            <div class="checked_cards_container">
+                <div class="main-title mt-5 mb-5 position-relative">
+                    <h2>successful access</h2>
+                    <p class="text-black-50 text-uppercase">you have access to make prescription for patient<br> put patient if and check</p>
+                </div>
+            </div>
+            <!-- show error -->
+            <?php if (isset($_GET['error'])) { ?>
+                <p class="error"><?php echo $_GET['error']; ?></p>
+            <?php } ?>
+            <!-- ----------------------------------------- -->
+            <!-- show successfil sign up -->
+            <?php if (isset($_GET['done'])) { ?>
+                <p class="done"><?php echo $_GET['done']; ?></p>
+            <?php } ?>
+            <!-- ----------------------------------------- -->
+            <form action="backend/add_prescription.php" method="post" class="id_input_field" enctype="multipart/form-data">
+                <div class="form-outline mb-4">
+                    <input type="numper" name="id_num_patient" hidden value="<?php echo $id_num_patient ?>">
+
+                    <label class="form-label" for="heart_rate">heart rate : </label>
+                    <input type="number" name="heart_rate" id="heart_rate" class="form-control" placeholder="default value : 70" />
+
+                    <label class="form-label" for="systolic_blood_pressure">systolic blood pressure : </label>
+                    <input type="number" name="systolic_blood_pressure" id="systolic_blood_pressure" class="form-control" placeholder="default value : 120"/>
+
+                    <label class="form-label" for="diastolic_blood_pressure">diastolic blood pressure : </label>
+                    <input type="number" name="diastolic_blood_pressure" id="diastolic_blood_pressure" class="form-control" placeholder="default value : 80"/>
+
+                    <label class="form-label" for="roshita">Diagnosis : </label>
+                    <input type="text" name="roshita" id="roshita" class="form-control Diagnosis_field"  placeholder="write the Diagnosis"/>
+
+                    <input type="numper" name="id_num_doctor" hidden value="<?php echo $user_id_session ?>">
+
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mb-4">done</button>
+            </form>
+        </div>
+        <div class="col-md-2 form_style col-sm-1">
+        </div>
+        <div class="col-md-4  col-sm-12">
+            <div class="checked_cards_container">
+                <div class="main-title mt-5 mb-5 position-relative">
+                    <h2>patient prescriptions</h2>
+                    <p class="text-black-50 text-uppercase">here you can find all prescriptions <br> for patient </p>
+                </div>
+            </div>
+            <!-- card for prescription start -->
+            <?php while ($row2 = mysqli_fetch_assoc($result2)) { ?>
+                <div class="card">
+
+                    <div class="rosheta">
+                        <h1>prescription</h1>
+                        <div class="row  g-0">
+                            <div class="name col-5">
+                                <h4>Doctor : </h4>
+                                <h2><?php
+                                    // select doctor name for roshita
+                                    $doctor_id_num = $row2['doctor_id'];
+                                    $sql3 = "select name from user_login where id = $doctor_id_num";
+                                    $result3 = mysqli_query($conn, $sql3);
+                                    $row3 = mysqli_fetch_assoc($result3);
+                                    echo $row3['name']; ?></h2>
+                                <!-- ------------------------ -->
+                            </div>
+                            <div class="col-1"></div>
+                            <div class="date col-5">
+                                <h4>Date : </h4>
+                                <h2><?php echo $row2['roshita_date']; ?></h2>
+                            </div>
+                            <div class="heart_rate col-5">
+                                <h4>heart rate : </h4>
+                                <h2><?php echo $row2['heart rate']; ?></h2>
+                            </div>
+                            <div class="col-1"></div>
+                            <div class="blood_pressure col-5">
+                                <h4>blood pressure : </h4>
+                                <h2><?php echo $row2['systolic_blood_pressure']; ?> / <?php echo $row2['diastolic_blood_pressure']; ?></h2>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title"></h5>
+                                <h2 class="history">Diagnosis</h2>
+                                <p class="card-text">
+                                    <?php echo $row2['roshita']; ?>
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="d-grid gap-2 d-md-block">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            <?php } ?>
+            <!-- -------------------------------------------------------- -->
+        </div>
+        <div class="col-md-1 form_style col-sm-1">
+        </div>
+    </div>
+
+
 
     <!-- ----------------------------------- -->
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/all.min.js"></script>
 
-    <!-- Welcome Section -->
-    <section class="welcome-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="welcome-text">
-                        <h2>Welcome, DR \ <?php
-                                            $user_name_file = $row['name'];
-                                            echo "$user_name_file";
-                                            ?></h2>
-                        <p>We extend a warm welcome to you, esteemed healthcare professional. You have entered a
-                            platform dedicated to revolutionizing patient care, and we are thrilled to have you on
-                            board.</p>
-                        <p>At Healthray, simplicity and speed are at the heart of our design, ensuring a seamless
-                            experience for you in treating your patients. Our commitment is to provide you with
-                            top-notch healthcare services, making your practice more efficient and patient-focused.</p>
-                        <p>Explore our site to discover a range of healthcare services tailored to your needs. Your
-                            dedication to healing aligns perfectly with our mission to enhance the well-being of
-                            individuals through cutting-edge healthcare solutions.</p>
-                        <button class="btn btn-primary" onclick="scrollToAboutUs()">Learn More About Us</button>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="welcome-image">
-                        <img src="<?php
-                                    if (empty($row["user_image"])) {
-                                        echo "imgs/user.jpg";
-                                    } else {
-                                        $user_image_file = $row['user_image'];
-                                        echo "user_image/$user_image_file";
-                                    }
-                                    ?>" alt="Welcome Image" class="img-fluid">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End Welcome Section -->
 
-    <!-- About Us Section -->
-    <section class="about-us">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <h2><b>About Us</b></h2>
-                    <p>Healthray is your trusted partner in transforming the landscape of healthcare management. As a
-                        healthcare professional, your role is vital in providing quality care, and our platform is
-                        designed to support and streamline your practice.</p>
-                    <p>Our hospital management software is meticulously crafted to manage and optimize every aspect of
-                        healthcare administration, from patient records and billing to staff scheduling and inventory
-                        management. With Healthray's software, you can elevate the efficiency of your operations, reduce
-                        paperwork, and enhance the overall quality of patient care.</p>
-                    <p>Experience the benefits of our clinic management system, tailored to meet the unique needs of
-                        medical practitioners like yourself. From organizing patient details to managing appointments
-                        and improving teamwork, our platform is here to empower your medical practice.</p>
-                    <button class="btn btn-primary" onclick="scrollToSection('our-services')">Explore Our
-                        Specialized Services</button>
-
-                </div>
-                <div class="col-lg-6">
-                    <img src="imgs/home4.jpg" alt="About Us Image" class="img-fluid">
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End About Us Section -->
-
-    <!-- Our Services Section -->
-    <section class="our-services" id="our-services">
-        <div class="container">
-            <h2><b>Our Services</b></h2>
-            <div class="row">
-                <!-- Service Card 1 -->
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <i class="fa-solid fa-hospital-user fa-2xl"></i>
-                            <h5 class="card-title">The Clinic Management System</h5>
-                            <p class="card-text">The Healthray software for hospitals helps to have quick access to all
-                                the information.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Service Card 2 -->
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <i class="fa-solid fa-file-invoice fa-2xl"></i>
-                            <h5 class="card-title">The Reception Management</h5>
-                            <p class="card-text">
-                                The Healthray App facility helps to keep all the records, queries, and follow-ups at
-                                your fingertips.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Service Card 3 -->
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <i class="fa-solid fa-rectangle-list fa-2xl"></i>
-                            <h5 class="card-title">The Discharge Summary Of Patient</h5>
-                            <p class="card-text">The Healthray App gives a discharge summary of each patient and is also
-                                easily accessible.</p>
-                        </div>
-                    </div>
-                </div>
-                <button class="btn btn-primary" onclick="scrollToSection('our-process')">Discover Our Process</button>
-
-            </div>
-
-        </div>
-
-    </section>
-    <!-- End Our Services Section -->
-
-    <!-- Our Best Working Process Section -->
-    <section class="our-process" id="our-process">
-        <div class="container">
-            <h2><b>Our Best Working Process</b></h2>
-            <div class="row">
-                <!-- Process Step 1 -->
-                <div class="col-md-4">
-                    <div class="process-step">
-                        <img src="imgs/home2.jpg" alt="Step 1 Image" class="img-fluid">
-                        <p><b>Add Patient</b></p>
-                        <p>Fill out the details of your patient using the reception module or the EMR.</p>
-                    </div>
-                </div>
-
-                <!-- Process Step 2 -->
-                <div class="col-md-4">
-                    <div class="process-step">
-                        <img src="imgs/home3.jpg" alt="Step 2 Image" class="img-fluid">
-                        <p><b>Make An Appointment</b></p>
-                        <p>You can manage your queue fast and remotely from anywhere and on any device with planned
-                            appointments.</p>
-                    </div>
-                </div>
-
-                <!-- Process Step 3 -->
-                <div class="col-md-4">
-                    <div class="process-step">
-                        <img src="imgs/home5.jpg" alt="Step 3 Image" class="img-fluid">
-                        <p><b>Generate Prescription</b></p>
-                        <p>Consult with patients to create a prescription in a few seconds.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End Our Best Working Process Section -->
-
-    <script>
-        function scrollToAboutUs() {
-            document.querySelector('.about-us').scrollIntoView({
-                behavior: 'smooth'
-            });
-        }
-
-        function scrollToSection(sectionId) {
-            document.getElementById(sectionId).scrollIntoView({
-                behavior: 'smooth'
-            });
-        }
-    </script>
 </body>
 
 </html>

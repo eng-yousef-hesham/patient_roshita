@@ -31,12 +31,15 @@
 }
 
 .about-us h2 {
+    font-size: 50px;
     color: #343a40;
 }
 
 .about-us p {
-    font-size: 18px;
+    font-size: 30px;
+    line-height: 1.5;
     color: #6c757d;
+    font-weight: bold;
 }
 
 .about-us img {
@@ -65,7 +68,7 @@
     margin-bottom: 20px;
     background-color: #333333;
     color: #ffffff;
-    border: 1px solid #555555;
+    border: 2px solid #555555;
     border-radius: 8px;
     transition: transform 0.3s ease-in-out;
 }
@@ -73,7 +76,7 @@
 /* Add hover effect for cards */
 .card:hover {
     transform: scale(1.05);
-    background-color: #555555;
+    background-color: #ffffff;
 }
 
 .card img {
@@ -96,7 +99,6 @@
     padding: 50px 0;
     background-color: #ffffff;
     border: 2px solid #333333;
-    /* Add border style */
     border-radius: 8px;
     margin-bottom: 30px;
 }
@@ -110,8 +112,7 @@
 .process-step {
     text-align: center;
     margin-bottom: 30px;
-    border: 1px solid #dddddd;
-    /* Add border style */
+    border: 1px solid #000000;
     border-radius: 8px;
     padding: 20px;
 }
@@ -132,5 +133,4 @@
     background-color: #3874ff;
     color: #ffffff;
     display: block;
-
 }

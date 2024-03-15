@@ -6,7 +6,10 @@ there are two ways:-
 
 <h3>1 ) for patient</h3>
 at first, the patient should have an account on our website then
+he can see who doctors he visited and the medicine that the doctor gave to you after your visit but the first time you will see that the prescription page is empty to add to this page 
+you first should do that
 when the patient wants to go to the doctor, he searches for the doctor who needs to visit and gives him access to see his medical history and write a prescription for once time
+
 
 
 <h3>2 ) for doctor</h3>

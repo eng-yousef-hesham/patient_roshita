@@ -1,10 +1,12 @@
 <h1>patient roshita</h1>
 <h2>introduction</h2>
-this project will help poth doctors and patient by help doctors to know the medical history for patient and help patient to have digital prescription.
+this project will help both doctors and patients by helping doctors to know the medical history of patients and help patients to have digital prescriptions.
 <h2>how to work</h2>
-there is two ways :-
+there are two ways:-
 
-1 ) for patient
+<h3>1 ) for patient</h3>
+at first, the patient should have an account on our website then
+when the patient wants to go to the doctor, he searches for the doctor who needs to visit and gives him access to see his medical history and write a prescription for once time
 
-2 ) for doctor 
-<h3>patient</h3>
+
+<h3>2 ) for doctor</h3>

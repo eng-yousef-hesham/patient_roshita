@@ -29,7 +29,7 @@ to logout or delete account you can click on the top right photo and select<br>
 
 
 <h3>2 ) for doctor</h3>
-![Screenshot (171)](https://github.com/eng-yousef-hesham/patient_roshita/assets/120247087/32936403-611a-4b4a-8790-bc66aa3662af)
+![Screenshot (171)](https://github.com/eng-yousef-hesham/patient_roshita/assets/120247087/abe7e6e1-a6d3-4802-a277-e4e3745ae01b)
 
 at first doctor should create an account and write his specialization <br>
 now if any patient login he will see that there is a new doctor added to the doctor page and he can give access to him.<br>

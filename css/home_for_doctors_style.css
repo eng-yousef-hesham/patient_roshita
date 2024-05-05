@@ -1,0 +1,136 @@
+/* Welcome Section */
+.welcome-section {
+    padding: 50px 0;
+    background-color: #4060e0b9;
+    color: #ffffff;
+}
+
+.welcome-text {
+    margin-bottom: 30px;
+}
+
+.welcome-text h2 {
+    font-size: 50px;
+}
+
+.welcome-text p {
+    font-size: 25px;
+    line-height: 1.5;
+}
+
+.welcome-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* About Us Section */
+.about-us {
+    padding: 50px 0;
+    background-color: #f8f9fa;
+}
+
+.about-us h2 {
+    font-size: 50px;
+    color: #343a40;
+}
+
+.about-us p {
+    font-size: 30px;
+    line-height: 1.5;
+    color: #6c757d;
+    font-weight: bold;
+}
+
+.about-us img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+
+/* Add border for the Our Services Section */
+.our-services {
+    padding: 50px 0;
+    background-color: #000000;
+    border: 2px solid #333333;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.our-services h2 {
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 40px;
+}
+
+.card {
+    margin-bottom: 20px;
+    background-color: #333333;
+    color: #ffffff;
+    border: 2px solid #555555;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Add hover effect for cards */
+.card:hover {
+    transform: scale(1.05);
+    background-color: #ffffff;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.card-title {
+    font-size: 1.5rem;
+}
+
+.card-text {
+    font-size: 1rem;
+}
+
+/* Add border for the Our Best Working Process Section */
+.our-process {
+    padding: 50px 0;
+    background-color: #ffffff;
+    border: 2px solid #333333;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.our-process h2 {
+    text-align: center;
+    color: #333333;
+    margin-bottom: 40px;
+}
+
+.process-step {
+    text-align: center;
+    margin-bottom: 30px;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.process-step img {
+    width: 250px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.process-step p {
+    font-size: 25px;
+    color: #555555;
+}
+
+/* Add styles for buttons */
+.btn-primary {
+    background-color: #3874ff;
+    color: #ffffff;
+    display: block;
+}
